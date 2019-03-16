@@ -58,7 +58,7 @@ public class ConsoleNL {
                 handleRemovePacient(Integer.parseInt(option[1]));
             }
             if (option[0].toLowerCase().contains("show")) {
-                handleViewProducts();
+                handleViewPacient();
             }
         }
 

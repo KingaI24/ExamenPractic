@@ -23,7 +23,7 @@ public class RepoPacient {
 
     public void remove(int id) {
         if (!storage.containsKey(id)) {
-            throw new RuntimeException("There is no transaction with the given id to remove.");
+            throw new RuntimeException("There is no pacient with the given id to remove.");
         }
         storage.remove(id);
     }
