@@ -1,0 +1,3 @@
+{"idMed":1,"idCard":1,"quantity":1,"date":"12.12.2018 12:12","basePrice":12.0,"discount":2.0,"finalPrice":10.0,"id":1}
+{"idMed":2,"idCard":2,"quantity":1,"date":"12.01.2019 13:15","basePrice":12.0,"discount":3.0,"finalPrice":10.0,"id":2}
+{"idMed":1,"idCard":2,"quantity":1,"date":"12.04.2019 12:19","basePrice":12.0,"discount":2.0,"finalPrice":10.0,"id":3}

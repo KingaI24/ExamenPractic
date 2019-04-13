@@ -1,0 +1,4 @@
+{"name":"Faringosept","manufacturer":"Terapia","price":12.0,"needPresciption":false,"id":1}
+{"name":"Echinaceae","manufacturer":"Parafarm","price":6.0,"needPresciption":false,"id":2}
+{"name":"ParacetamolSinus","manufacturer":"Zentiva","price":5.75,"needPresciption":false,"id":3}
+{"name":"Augmentin","manufacturer":"GSK","price":9.6,"needPresciption":true,"id":4}
