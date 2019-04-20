@@ -5,6 +5,8 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.cell.TextFieldTableCell?>
+
 <TabPane fx:controller="UI.Controller" xmlns:fx="http://javafx.com/fxml" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" tabClosingPolicy="UNAVAILABLE">
 
     <tabs>
@@ -158,10 +160,13 @@
                                     <PropertyValueFactory property="idCard" />
                                 </cellValueFactory>
                             </TableColumn>
-                            <TableColumn fx:id="tableColumnQuantity" text="Quantity">
+                            <TableColumn fx:id="tableColumnQuantity" text="Quantity" onEditCommit="#editTransactionQuantity">
                                 <cellValueFactory>
                                     <PropertyValueFactory property="quantity" />
                                 </cellValueFactory>
+                                <cellFactory>
+                                    <TextFieldTableCell fx:factory="forTableColumn" />
+                                </cellFactory>
                             </TableColumn>
                             <TableColumn fx:id="tableColumnDate" text="Date">
                                 <cellValueFactory>

@@ -14,8 +14,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
 
@@ -114,6 +116,7 @@ public class Controller {
     private void initialize() {
 
         Platform.runLater(() -> {
+                tableColumnQuantity.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
                 pacients.addAll(servicePacient.showPacients());
                 tblPacients.setItems(pacients);
                 products.addAll(serviceProduct.showProducts());
@@ -275,7 +278,7 @@ public class Controller {
     public void btnBestSellerClick(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/main/resources/BestSeller.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/BestSeller.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 400, 400);
         Stage stage = new Stage();
         stage.setTitle("Sort Products By Amount Sold");
@@ -293,7 +296,7 @@ public class Controller {
     public void btnMostDiscountsClick(ActionEvent actionEvent) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/main/resources/MostDiscounts.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/MostDiscounts.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 400, 400);
         Stage stage = new Stage();
         stage.setTitle("Pacient Cards with most discounts");
@@ -366,5 +369,17 @@ public class Controller {
         servicePacient.redo();
         pacients.clear();
         pacients.addAll(servicePacient.showPacients());
+    }
+
+    public void editTransactionQuantity(TableColumn.CellEditEvent cellEditEvent) {
+        Transaction editedTransaction = (Transaction) cellEditEvent.getRowValue();
+        try {
+            Integer newQuantity = (Integer) cellEditEvent.getNewValue();
+            serviceTransaction.addOrUpdate(editedTransaction.getId(), editedTransaction.getIdMed(), editedTransaction.getIdCard(),newQuantity,editedTransaction.getDate());
+            editedTransaction.setQuantity(newQuantity);
+        } catch (Exception ex) {
+            PopUp.createPopup(ex.getMessage());
+        }
+        tblTransaction.refresh();
     }
 }

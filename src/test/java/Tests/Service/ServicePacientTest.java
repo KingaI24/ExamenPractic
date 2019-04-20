@@ -1,15 +1,17 @@
-package Tests.Service;
+package Service;
 
-import Domain.*;
+import Domain.Pacient;
+import Domain.PacientValidator;
+import Domain.Transaction;
+import Domain.TransactionValidator;
 import Repository.GeneralRepository;
 import Repository.IRepository;
-import Service.ServicePacient;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ServicePacientTest {
 
@@ -31,14 +33,6 @@ class ServicePacientTest {
         assertEquals(1,pacientRepository.show().size());
         assertEquals(1,pacientRepository.findById(1).getId());
         assertEquals("1111111111111",pacientRepository.findById(1).getCNP());
-        assertEquals("Marina",pacientRepository.findById(1).getFirstName());
-        assertEquals("Dana",pacientRepository.findById(1).getLastName());
-        assertEquals("13.09.1990",pacientRepository.findById(1).getBirthDate());
-        assertEquals("12.12.2018",pacientRepository.findById(1).getRegDate());
-        servicePacient.addOrUpdate(1,"1111111111113","","", "","");
-        assertEquals(1,pacientRepository.show().size());
-        assertEquals(1,pacientRepository.findById(1).getId());
-        assertEquals("1111111111113",pacientRepository.findById(1).getCNP());
         assertEquals("Marina",pacientRepository.findById(1).getFirstName());
         assertEquals("Dana",pacientRepository.findById(1).getLastName());
         assertEquals("13.09.1990",pacientRepository.findById(1).getBirthDate());

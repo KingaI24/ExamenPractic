@@ -1,4 +1,4 @@
-package Tests.Service;
+package Service;
 
 import Domain.DrugProduct;
 import Domain.DrugProductValidator;

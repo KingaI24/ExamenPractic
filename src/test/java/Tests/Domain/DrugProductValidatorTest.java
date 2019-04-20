@@ -1,8 +1,5 @@
-package Tests.Domain;
+package Domain;
 
-import Domain.DomainException;
-import Domain.DrugProduct;
-import Domain.DrugProductValidator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,12 +17,13 @@ class DrugProductValidatorTest {
             ;
         }
         try {
-            dp.setPrice(0.00);
+            validator.validate(dp);
             fail("Drug Product validator threw no exception for faulty input!");
         } catch (DomainException e) {
             assertEquals(e.getMessage(), "price should be > 0");
         }
         try {
+            dp.setPrice(0.00);
             validator.validate(dp);
             fail("Drug Product validator threw no exception for faulty input!");
             } catch (DomainException e) {

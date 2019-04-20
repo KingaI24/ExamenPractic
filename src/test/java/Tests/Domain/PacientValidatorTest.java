@@ -1,4 +1,4 @@
-package Tests.Domain;
+package Domain;
 
 import Domain.DomainException;
 import Domain.Pacient;

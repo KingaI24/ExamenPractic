@@ -1,17 +1,14 @@
-package Tests.Service;
+package Service;
 
 import Domain.*;
 import Repository.GeneralRepository;
 import Repository.IRepository;
-import Service.ServicePacient;
-import Service.ServiceProduct;
-import Service.ServiceTransaction;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ServiceTransactionTest {
 
@@ -25,7 +22,6 @@ class ServiceTransactionTest {
     @Test
     void addOrUpdate() {
         serviceProduct.addOrUpdate(1,"Faringosept", "Terapia", 12, false);
-        serviceProduct.addOrUpdate(2,"Faringosept", "Terapia", 20, false);
 
         serviceTransaction.addOrUpdate(1,1,1,1, "12.12.2018 12:12");
         assertEquals(1,serviceTransaction.showAllTransactions().size());
@@ -35,12 +31,13 @@ class ServiceTransactionTest {
         assertEquals(1,transactionRepository.findById(1).getQuantity());
         assertEquals("12.12.2018 12:12",transactionRepository.findById(1).getDate());
         assertEquals(12,transactionRepository.findById(1).getBasePrice());
-        assertEquals(2,transactionRepository.findById(1).getDiscount());
-        assertEquals(10,transactionRepository.findById(1).getFinalPrice());
-        serviceTransaction.addOrUpdate(1,2,3,1, "12.12.2019 12:12");
+        assertEquals(0,transactionRepository.findById(1).getDiscount());
+        assertEquals(12,transactionRepository.findById(1).getFinalPrice());
+        servicePacient.addOrUpdate(3,"1234567890123", "test", "test", "12.12.1991", "18.01.2018");
+        serviceTransaction.addOrUpdate(1,1,3,1, "12.12.2019 12:12");
         assertEquals(1,serviceTransaction.showAllTransactions().size());
         assertEquals(1,transactionRepository.findById(1).getId());
-        assertEquals(2,transactionRepository.findById(1).getIdMed());
+        assertEquals(1,transactionRepository.findById(1).getIdMed());
         assertEquals(3,transactionRepository.findById(1).getIdCard());
         assertEquals(1,transactionRepository.findById(1).getQuantity());
         assertEquals("12.12.2019 12:12",transactionRepository.findById(1).getDate());
@@ -57,7 +54,7 @@ class ServiceTransactionTest {
         assertEquals(3,transactionRepository.findById(1).getIdCard());
         assertEquals(1,transactionRepository.findById(1).getQuantity());
         assertEquals("12.01.2019 13:15",transactionRepository.findById(1).getDate());
-        assertEquals(20,transactionRepository.findById(1).getBasePrice());
+        assertEquals(12,transactionRepository.findById(1).getBasePrice());
         assertEquals(4,transactionRepository.findById(1).getDiscount());
         assertEquals(16,transactionRepository.findById(1).getFinalPrice());
 
@@ -65,6 +62,8 @@ class ServiceTransactionTest {
 
     @Test
     void remove() {
+        serviceProduct.addOrUpdate(1,"test", "test", 12.00, false);
+        serviceProduct.addOrUpdate(2,"test", "test", 14.00, false);
         serviceTransaction.addOrUpdate(1,1,1,1, "12.12.2018 12:12");
         serviceTransaction.addOrUpdate(2,2,2,1,"12.01.2019 13:15");
         serviceTransaction.remove(1);

@@ -10,8 +10,8 @@ public class ServiceTransaction {
     private IRepository<Transaction> transactionRepository;
     private IRepository<DrugProduct> productRepository;
     private IRepository<Pacient> pacientRepository;
-    private Stack<main.java.Service.UndoRedoOp<Transaction>> undoableOperations = new Stack<>();
-    private Stack<main.java.Service.UndoRedoOp<Transaction>> redoableeOperations = new Stack<>();
+    private Stack<UndoRedoOp<Transaction>> undoableOperations = new Stack<>();
+    private Stack<UndoRedoOp<Transaction>> redoableeOperations = new Stack<>();
 
     public ServiceTransaction(IRepository<Transaction> transactionRepository, IRepository<DrugProduct> productRepository, IRepository<Pacient> pacientRepository) {
         this.transactionRepository = transactionRepository;
@@ -42,27 +42,32 @@ public class ServiceTransaction {
             throw new ServiceException("There is no product with the given id!");
         }
 
-        double basePrice = productSold.getPrice();
-        double discount = 0;
+        double basePrice = Math.round(productSold.getPrice() * quantity * 100) / 100.0;
+        double percentage = 0;
         double finalPrice = basePrice;
         if (buyer != null) {
             if (productSold.isNeedPresciption()) {
-                discount = 0.15; // 15% discount
+                percentage = 0.15; // 15% discount
             } else {
-                discount = 0.1; // 10% discount
+                percentage = 0.1; // 10% discount
             }
         }
-        finalPrice = finalPrice - (finalPrice*discount);
+        finalPrice = Math.round((finalPrice - (finalPrice * percentage)) * 100) /100.0;
+        double discount = Math.round((basePrice - finalPrice) * 100) / 100.0;
 
         Transaction transaction = new Transaction(id, idMed, idCard, quantity, date, basePrice, discount, finalPrice);
 
         transactionRepository.add(transaction);
-        undoableOperations.add(new AddOperation<>(transactionRepository, transaction));
-        redoableeOperations.clear();
+        if (existing == null) {
+            undoableOperations.push(new AddOperation<>(transactionRepository, transaction));
+        } else {
+            undoableOperations.push(new UpdateOperation<>(transactionRepository, transaction, existing));
+        }
         return transaction;
     }
 
     public void remove(int id) {
+        undoableOperations.push(new RemoveOperation<>(transactionRepository, transactionRepository.findById(id)));
         transactionRepository.remove(id);
     }
 
@@ -85,10 +90,10 @@ public class ServiceTransaction {
         Map<String, Integer> assess = new HashMap<>();
 
         for (Transaction t : transactionRepository.show()) {
-            if (!assess.containsKey(productRepository.findById(t.getIdCard()).getName())) {
-                assess.put(productRepository.findById(t.getIdCard()).getName(), t.getQuantity());
+            if (!assess.containsKey(productRepository.findById(t.getIdMed()).getName())) {
+                assess.put(productRepository.findById(t.getIdMed()).getName(), t.getQuantity());
             } else {
-                assess.put(productRepository.findById(t.getIdCard()).getName(), assess.get(productRepository.findById(t.getIdCard()).getName()) + t.getQuantity());
+                assess.put(productRepository.findById(t.getIdMed()).getName(), assess.get(productRepository.findById(t.getIdCard()).getName()) + t.getQuantity());
             }
         }
         List<ProductSoldVM> listSold = new ArrayList<>();
@@ -154,18 +159,18 @@ public class ServiceTransaction {
 
     public void undo() {
         if (!undoableOperations.empty()) {
-            main.java.Service.UndoRedoOp<Transaction> lastOperation = undoableOperations.pop();
+            UndoRedoOp<Transaction> lastOperation = undoableOperations.pop();
             lastOperation.doUndo();
-            redoableeOperations.add(lastOperation);
+            redoableeOperations.push(lastOperation);
 
         }
     }
 
     public void redo() {
         if (!redoableeOperations.empty()) {
-            main.java.Service.UndoRedoOp<Transaction> lastOperation = redoableeOperations.pop();
+            UndoRedoOp<Transaction> lastOperation = redoableeOperations.pop();
             lastOperation.doRedo();
-            undoableOperations.add(lastOperation);
+            undoableOperations.push(lastOperation);
         }
     }
 }

@@ -1,15 +1,14 @@
-package Tests.Service;
+package Service;
 
 import Domain.Transaction;
-import Service.CompareDate;
-import Service.ServiceException;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class CompareDateTest {
 
@@ -22,18 +21,6 @@ class CompareDateTest {
     @Test
     void compareCorrectlyDates() {
 
-        try {
-            Date d1 = format.parse(t1.getDate());
-            Date d2 = format.parse(t2.getDate());
-            Date d4 = format.parse(t4.getDate());
-            assertEquals(d1.compareTo(d2),0);
-            assertEquals(d2.compareTo(d1),0);
-            assertEquals(d4.compareTo(d1),-1);
-            assertEquals(d4.compareTo(d1),-1);
-            assertEquals(d4.compareTo(d2),-1);
-        } catch (ParseException e) {
-            ;
-        }
     }
 
     @Test

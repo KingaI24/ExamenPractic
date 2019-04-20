@@ -2,7 +2,6 @@ package Service;
 
 import Domain.Pacient;
 import Repository.IRepository;
-import main.java.Service.UndoRedoOp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ public class ServicePacient {
             }
         }
 
-        IsPrim is = new IsPrim();
+        IsPrime is = new IsPrime();
         if (is.isPrime(id))
             throw new ServiceException("error: ID should be prime");
 
@@ -38,7 +37,9 @@ public class ServicePacient {
     }
 
     public void remove (int id) {
+        undoableOperations.add(new AddOperation<>(repository, repository.findById(id)));
         repository.remove(id);
+        redoableeOperations.clear();
     }
 
     public List<Pacient> showPacients() {

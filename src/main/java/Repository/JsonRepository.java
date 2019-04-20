@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class JsonRepository<T extends Entity> implements Repository.IRepository<T> {
+public class JsonRepository<T extends Entity> implements IRepository<T> {
 
     private IValidator<T> validator;
     private String filename;

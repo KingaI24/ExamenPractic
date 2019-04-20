@@ -1,4 +1,4 @@
-package main.java.Service;
+package Service;
 
 import Domain.Entity;
 import Repository.IRepository;

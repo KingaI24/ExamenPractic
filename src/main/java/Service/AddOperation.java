@@ -3,7 +3,7 @@ package Service;
 import Domain.Entity;
 import Repository.IRepository;
 
-public class AddOperation<T extends Entity> extends main.java.Service.UndoRedoOp<T> {
+public class AddOperation<T extends Entity> extends UndoRedoOp<T> {
 
     private T addedEntity;
 

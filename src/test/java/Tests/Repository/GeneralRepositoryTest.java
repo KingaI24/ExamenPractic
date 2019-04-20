@@ -1,9 +1,6 @@
-package Tests.Repository;
+package Repository;
 
 import Domain.*;
-import Repository.GeneralRepository;
-import Repository.IRepository;
-import Repository.RepositoryException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
