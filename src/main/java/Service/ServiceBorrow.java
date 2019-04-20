@@ -66,7 +66,7 @@ public class ServiceBorrow {
 
         double income = 0;
         for (Borrow b : borrowRepository.show()) {
-            if (b.getId() == id) {
+            if (b.getIdCar() == id) {
                 income += b.getNoDays() * carRepository.findById(b.getId()).getPricePerDay();
             }
         }
