@@ -65,11 +65,14 @@ public class ServiceBorrow {
         }
 
         double income = 0;
+        int days = 0;
         for (Borrow b : borrowRepository.show()) {
             if (b.getIdCar() == id) {
-                income += b.getNoDays() * carRepository.findById(b.getId()).getPricePerDay();
+                days += b.getNoDays();
             }
         }
+
+        income = days * carRepository.findById(existentCar.getId()).getPricePerDay();
         return income;
     }
 
@@ -87,7 +90,7 @@ public class ServiceBorrow {
 
         double km = carRepository.findById(id).getKmInitial();
         for (Borrow b : borrowRepository.show()) {
-            if (b.getId() == id) {
+            if (b.getIdCar() == id) {
                 km += b.getKm();
             }
         }

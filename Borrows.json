@@ -1,3 +1,6 @@
 {"IdCar":1,"noDays":5,"km":200.0,"id":1}
 {"IdCar":2,"noDays":1,"km":250.0,"id":2}
 {"IdCar":2,"noDays":1,"km":250.0,"id":3}
+{"IdCar":5,"noDays":2,"km":250.0,"id":4}
+{"IdCar":1,"noDays":12,"km":120.0,"id":5}
+{"IdCar":6,"noDays":2,"km":500.0,"id":6}

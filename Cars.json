@@ -2,3 +2,5 @@
 {"model":"Audi","kmInitial":12000.0,"pricePerDay":200.0,"id":2}
 {"model":"Ford","kmInitial":20000.0,"pricePerDay":400.0,"id":3}
 {"model":"Dacia","kmInitial":25000.0,"pricePerDay":150.0,"id":4}
+{"model":"aaa","kmInitial":12000.0,"pricePerDay":120.0,"id":5}
+{"model":"BMW","kmInitial":40000.0,"pricePerDay":500.0,"id":6}
