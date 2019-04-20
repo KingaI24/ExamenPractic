@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.cell.TextFieldTableCell?>
+
+<TabPane fx:controller="UI.Controller" xmlns:fx="http://javafx.com/fxml" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" tabClosingPolicy="UNAVAILABLE">
+
+    <tabs>
+        <Tab fx:id="carTabPage" text="CARS">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <VBox>
+                    <Label text="CAR OPERATIONS:" />
+                    <TableView fx:id="tblCars" editable="true">
+                        <columns>
+                            <TableColumn fx:id="tableColumnIdPC" text="ID">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="id" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="tableColumnModel" text="Model">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="model" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="tableColumnKmInitial" text="Aquisition Km">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="kmInitial" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="tableColumnPricePerDay" text="Price/day">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="pricePerDay" />
+                                </cellValueFactory>
+                            </TableColumn>
+                        </columns>
+                    </TableView>
+
+                    <HBox>
+                        <Button fx:id="btnAddCar" onAction="#btnCarAddClick" text="ADD" />
+                        <Spinner fx:id="spnIdC" initialValue="0" editable="true" min="0" max="2000000000"/>
+                        <TextField fx:id="txtModel" promptText="Model"/>
+                        <TextField fx:id="txtKmInitial" promptText="Aquisition km"/>
+                        <TextField fx:id="txtPricePerDay" promptText="Price/day"/>
+                    </HBox>
+                    <Button fx:id="btnCloseP" text="EXIT" onAction="#btnCloseClick"/>
+
+                </VBox>
+            </content>
+        </Tab>
+        <Tab fx:id="borrowTabPage" text="Borrows">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <VBox>
+                    <Label text="BORROW OPERATIONS:" />
+                    <TableView fx:id="tblBorrow" editable="true">
+                        <columns>
+                            <TableColumn fx:id="tableColumnIdB" text="ID">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="id" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="tableColumnIDCar" text="ID Car">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="idCar" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="tableColumnDaysBorrowed" text="No of days borrowed">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="noDays" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn fx:id="tableColumnKm" text="Km">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="km" />
+                                </cellValueFactory>
+                            </TableColumn>
+                        </columns>
+                    </TableView>
+
+                    <HBox>
+                        <Button fx:id="btnAddBorrow" onAction="#btnBorrowAddClick" text="ADD" />
+                        <Spinner fx:id="spnId" initialValue="0" editable="true" min="0" max="2000000000"/>
+                        <TextField fx:id="txtIdCar" promptText="ID Car"/>
+                        <TextField fx:id="txtNoDays" promptText="No Days"/>
+                        <TextField fx:id="txtKm" promptText="Km"/>
+                    </HBox>
+
+                    <HBox>
+                        <Button fx:id="btnReportIncome" onAction="#btnReportIncomeClick" text="Report Income For Car" />
+                        <TextField fx:id="txtIdCarI" promptText="ID Car"/>
+                    </HBox>
+
+                    <HBox>
+                        <Button fx:id="btnReportKm" onAction="#btnReportKmClick" text="Report km for Car" />
+                        <TextField fx:id="txtIdCarKm" promptText="ID Car"/>
+                    </HBox>
+
+                    <Button fx:id="btnReportPopularity" onAction="#btnReportPopularityClick" text="Report Popularity" />
+                    <Button fx:id="btnClose" text="EXIT" onAction="#btnCloseClick"/>
+                </VBox>
+            </content>
+        </Tab>
+
+    </tabs>
+</TabPane>

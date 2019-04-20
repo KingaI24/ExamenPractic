@@ -1,7 +1,6 @@
 package Repository;
 
 import Domain.Entity;
-import Domain.IValidator;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -16,13 +15,15 @@ import java.util.Map;
 
 public class JsonRepository<T extends Entity> implements IRepository<T> {
 
-    private IValidator<T> validator;
+    /**
+     * stocare in Json
+     */
+
     private String filename;
     private Map<Integer, T> storage = new HashMap<>();
     private Type type;
 
-    public JsonRepository(IValidator<T> validator, String filename, Type type) {
-        this.validator = validator;
+    public JsonRepository(String filename, Type type) {
         this.filename = filename;
         this.type = type;
     }
@@ -59,20 +60,32 @@ public class JsonRepository<T extends Entity> implements IRepository<T> {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return localizare entry dupa id
+     */
     @Override
     public T findById(int id) {
         loadFromFile();
         return storage.get(id);
     }
 
+    /**
+     *
+     * @param entity adaugare in fct de caracteristicile Map
+     */
     @Override
     public void add(T entity) {
         loadFromFile();
-        validator.validate(entity);
         storage.put(Integer.valueOf(entity.getId()), entity);
         writeToFile();
     }
 
+    /**
+     *
+     * @param id eliminare dupa id
+     */
     @Override
     public void remove(int id) {
         loadFromFile();
@@ -84,9 +97,14 @@ public class JsonRepository<T extends Entity> implements IRepository<T> {
         writeToFile();
     }
 
+    /**
+     *
+     * @return lista cu toate entryurile
+     */
     @Override
     public List<T> show() {
         loadFromFile();
         return new ArrayList<>(storage.values());
     }
+
 }

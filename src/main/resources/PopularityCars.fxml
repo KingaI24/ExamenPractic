@@ -9,22 +9,27 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="UI.ControllerMostDiscount"
+      fx:controller="UI.ControllerPopularityReport"
       prefHeight="400.0" prefWidth="600.0"
       alignment="CENTER">
 
     <VBox alignment="CENTER">
-        <Label text="Pacient IDCards with most discounts received" />
-        <TableView fx:id="tblMostDiscount">
+        <Label text="Products By Amount Sold" />
+        <TableView fx:id="tblPopularityCars">
             <columns>
-                <TableColumn fx:id="tableColumnPacientId" text="PRODUCT">
+                <TableColumn fx:id="tableColumnCarID" text="ID">
                     <cellValueFactory>
-                        <PropertyValueFactory property="idCard"/>
+                        <PropertyValueFactory property="id"/>
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="tableColumnCumulatedDiscount" text="AMOUNT SOLD">
+                <TableColumn fx:id="tableColumnCarModel" text="MODEL">
                     <cellValueFactory>
-                        <PropertyValueFactory property="discount"/>
+                        <PropertyValueFactory property="model"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="tableColumnDaysBorrowed" text="Days Borrowed">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="noDays"/>
                     </cellValueFactory>
                 </TableColumn>
             </columns>
